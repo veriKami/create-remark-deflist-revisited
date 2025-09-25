@@ -15,6 +15,27 @@ They are also published as standalone repositories (templates):
 
 ## Installation
 
+### Interactive Mode
+
+```bash
+## npx
+ツ npx create-remark-deflist-revisited
+```
+```bash
+## npm
+ツ npm create remark-deflist-revisited
+ツ npm init remark-deflist-revisited
+```
+
+### Cloudflare Worker demo (via module itself)
+
+```bash
+ツ npx @verikami/remark-deflist-revisited@latest
+ツ npx @verikami/remark-deflist-revisited --help
+```
+
+### Git clone
+
 ```bash
 ## Simple Node.js example
 ツ git clone git@github.com:veriKami/remark-deflist-revisited-simple.git
@@ -26,11 +47,17 @@ They are also published as standalone repositories (templates):
 ツ git clone git@github.com:veriKami/remark-deflist-revisited-worker.git
 ```
 
-Cloudflare Worker demo (via module itself)
+### GitHub clone + create
 
 ```bash
-ツ npx @verikami/remark-deflist-revisited@latest
-ツ npx @verikami/remark-deflist-revisited --help
+## Simple Node.js example
+ツ gh repo create --private my-simple -c -p veriKami/remark-deflist-revisited-simple
+
+## Express.js example
+ツ gh repo create --private my-express -c -p veriKami/remark-deflist-revisited-express
+
+## Cloudflare Worker example
+ツ gh repo create --private my-worker -c -p veriKami/remark-deflist-revisited-worker
 ```
 
 ## License
