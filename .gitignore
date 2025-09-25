@@ -1,0 +1,17 @@
+#: --------------------------------
+#: veriKami
+
+node_modules
+
+**/•*
+*~
+Icon*
+**/Icon*
+
+remark-*
+*copy*
+
+package-lock.json
+
+*.tgz
+package*
