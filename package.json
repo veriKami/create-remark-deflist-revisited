@@ -1,0 +1,57 @@
+{
+  "name": "create-remark-deflist-revisited",
+  "version": "0.0.0",
+  "description": "Scaffold a project with @verikami/remark-deflist-revisited – interactive template selection",
+  "keywords": [
+    "remark",
+    "remark-plugin",
+    "remark-deflist",
+    "markdown",
+    "markdown-plugin",
+    "definition-list",
+    "deflist",
+    "cli",
+    "scaffold",
+    "template",
+    "interactive",
+    "cloudflare",
+    "express",
+    "node",
+    "pnpm",
+    "npm",
+    "yarn",
+    "veriKami"
+  ],
+  "author": "veriKami <verikami@gmail.com> (https://verikami.com/)",
+  "license": "MIT",
+  "repository": "github:veriKami/create-remark-deflist-revisited",
+  "homepage": "https://github.com/veriKami/create-remark-deflist-revisited#readme",
+  "type": "module",
+  "bin": {
+    "create-remark-deflist-revisited": "./cli.js"
+  },
+  "files": [
+    "cli.js",
+    "templates"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "./cli.js",
+    "test": "npm publish --dry-run",
+    "show": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+    "pack": "npm pack"
+  },
+  "dependencies": {
+    "ansi-colors": "^4.1.3",
+    "create-remark-deflist-revisited": "^0.0.0",
+    "enquirer": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

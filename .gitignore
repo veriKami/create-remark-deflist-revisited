@@ -15,3 +15,4 @@ package-lock.json
 
 *.tgz
 package*
+!package.json
