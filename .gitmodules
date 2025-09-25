@@ -1,0 +1,9 @@
+[submodule "templates/remark-deflist-revisited-simple"]
+	path = templates/remark-deflist-revisited-simple
+	url = git@github.com:veriKami/remark-deflist-revisited-simple.git
+[submodule "templates/remark-deflist-revisited-express"]
+	path = templates/remark-deflist-revisited-express
+	url = git@github.com:veriKami/remark-deflist-revisited-express.git
+[submodule "templates/remark-deflist-revisited-worker"]
+	path = templates/remark-deflist-revisited-worker
+	url = git@github.com:veriKami/remark-deflist-revisited-worker.git
