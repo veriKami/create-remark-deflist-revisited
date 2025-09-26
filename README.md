@@ -15,16 +15,18 @@ They are also published as standalone repositories (templates):
 
 ## Interactive Mode
 
-####  npm
+#### npm
 
 ```bash
-ツ npm create remark-deflist-revisited
+ツ npm create remark-deflist-revisited@latest
 ```
+
 #### pnpm
 
 ```bash
 ツ pnpm create remark-deflist-revisited
 ```
+
 #### yarn
 
 ```bash
