@@ -42,7 +42,9 @@
   },
   "scripts": {
     "start": "./cli.js",
+    "self": "npx create-remark-deflist-revisited",
     "test": "npm publish --dry-run",
+    "stats": "npx pkg-stats create-remark-deflist-revisited",
     "show": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
     "pack": "npm pack"
   },
