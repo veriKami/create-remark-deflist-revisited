@@ -19,13 +19,13 @@ They are also published as standalone repositories (templates):
 #### npm + pnpm + yarn
 
 ```bash
-ツ npm create remark-deflist-revisited@latest
+npm create remark-deflist-revisited@latest
 ```
 ```bash
-ツ pnpm create remark-deflist-revisited
+pnpm create remark-deflist-revisited
 ```
 ```bash
-ツ yarn create remark-deflist-revisited
+yarn create remark-deflist-revisited
 ```
 
 ## Other Options
@@ -33,8 +33,10 @@ They are also published as standalone repositories (templates):
 ### Cloudflare Worker demo (via module itself)
 
 ```bash
-ツ npx @verikami/remark-deflist-revisited@latest
-ツ npx @verikami/remark-deflist-revisited --help
+npx @verikami/remark-deflist-revisited@latest
+```
+```bash
+npx @verikami/remark-deflist-revisited --help
 ```
 
 ### GitHub clone + create from Template
