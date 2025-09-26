@@ -46,7 +46,8 @@
     "test": "npm publish --dry-run",
     "stats": "npx pkg-stats create-remark-deflist-revisited",
     "show": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-    "pack": "npm pack"
+    "pack": "npm pack",
+    "bump": "npm version minor && git push && git push --tags"
   },
   "dependencies": {
     "ansi-colors": "^4.1.3",
