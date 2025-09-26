@@ -9,26 +9,21 @@
 Example implementations for module **`@verikami/remark-deflist-revisited`**.  
 They are also published as standalone repositories (templates):
 
-- **Simple** → [veriKami/remark-deflist-revisited-simple][simple]
-- **Express.js** → [veriKami/remark-deflist-revisited-express][express]
-- **Cloudflare Worker** → [veriKami/remark-deflist-revisited-worker][worker]
+- **Simple** → [veriKami/remark-deflist-revisited-simple][+:simple]
+- **Express.js** → [veriKami/remark-deflist-revisited-express][+:express]
+- **Cloudflare Worker** → [veriKami/remark-deflist-revisited-worker][+:worker]
+- **Astro** → [veriKami/remark-deflist-revisited-astro][+:astro]
 
 ## Interactive Mode
 
-#### npm
+#### npm + pnpm + yarn
 
 ```bash
 ツ npm create remark-deflist-revisited@latest
 ```
-
-#### pnpm
-
 ```bash
 ツ pnpm create remark-deflist-revisited
 ```
-
-#### yarn
-
 ```bash
 ツ yarn create remark-deflist-revisited
 ```
@@ -42,20 +37,7 @@ They are also published as standalone repositories (templates):
 ツ npx @verikami/remark-deflist-revisited --help
 ```
 
-### Git clone
-
-```bash
-## Simple Node.js example
-ツ git clone git@github.com:veriKami/remark-deflist-revisited-simple.git
-
-## Express.js example
-ツ git clone git@github.com:veriKami/remark-deflist-revisited-express.git
-
-## Cloudflare Worker example
-ツ git clone git@github.com:veriKami/remark-deflist-revisited-worker.git
-```
-
-### GitHub clone + create
+### GitHub clone + create from Template
 
 ```bash
 ## Simple Node.js example
@@ -66,6 +48,9 @@ They are also published as standalone repositories (templates):
 
 ## Cloudflare Worker example
 ツ gh repo create --private my-worker -c -p veriKami/remark-deflist-revisited-worker
+
+## Astro example
+ツ gh repo create --private my-astro -c -p veriKami/remark-deflist-revisited-astro
 ```
 
 ## License
@@ -81,9 +66,11 @@ This project is Open Source and available under the MIT License.
 [generated]: https://verikami.github.io/remark-deflist-revisited/generated
 
 [module]: https://github.com/veriKami/remark-deflist-revisited
-[simple]: https://github.com/veriKami/remark-deflist-revisited-simple
-[express]: https://github.com/veriKami/remark-deflist-revisited-express
-[worker]: https://github.com/veriKami/remark-deflist-revisited-worker
+[samples]: https://github.com/veriKami/remark-deflist-revisited/tree/main/samples
+[+:simple]: https://github.com/veriKami/remark-deflist-revisited-simple
+[+:express]: https://github.com/veriKami/remark-deflist-revisited-express
+[+:worker]: https://github.com/veriKami/remark-deflist-revisited-worker
+[+:astro]: https://github.com/veriKami/remark-deflist-revisited-astro
 
 [GH]: https://github.com/veriKami/remark-deflist-revisited
 [GH Badge]: https://img.shields.io/badge/GitHub-Repository-blue?logo=github
