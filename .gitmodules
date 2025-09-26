@@ -7,3 +7,7 @@
 [submodule "templates/remark-deflist-revisited-worker"]
 	path = templates/remark-deflist-revisited-worker
 	url = git@github.com:veriKami/remark-deflist-revisited-worker.git
+[submodule "templates/remark-deflist-revisited-astro"]
+	path = templates/remark-deflist-revisited-astro
+	url = https://github.com/veriKami/remark-deflist-revisited-astro
+	branch = main
