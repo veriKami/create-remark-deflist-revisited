@@ -13,19 +13,25 @@ They are also published as standalone repositories (templates):
 - **Express.js** → [veriKami/remark-deflist-revisited-express][express]
 - **Cloudflare Worker** → [veriKami/remark-deflist-revisited-worker][worker]
 
-## Installation
+## Interactive Mode
 
-### Interactive Mode
+####  npm
 
 ```bash
-## npx
-ツ npx create-remark-deflist-revisited
-```
-```bash
-## npm
 ツ npm create remark-deflist-revisited
-ツ npm init remark-deflist-revisited
 ```
+#### pnpm
+
+```bash
+ツ pnpm create remark-deflist-revisited
+```
+#### yarn
+
+```bash
+ツ yarn create remark-deflist-revisited
+```
+
+## Other Options
 
 ### Cloudflare Worker demo (via module itself)
 
@@ -62,8 +68,7 @@ They are also published as standalone repositories (templates):
 
 ## License
 
-This project is Open Source and available under the MIT License.
-
+This project is Open Source and available under the MIT License.  
 2025 © MIT °// [veriKami] °// [Weronika Kami]
 
 [veriKami]: https://verikami.com
@@ -91,4 +96,4 @@ This project is Open Source and available under the MIT License.
 [Downloads Badge]: https://img.shields.io/npm/dm/@verikami/remark-deflist-revisited.svg
 
 [Socket]: https://socket.dev/npm/package/@verikami/remark-deflist-revisited
-[Socket Badge]: https://badge.socket.dev/npm/package/@verikami/remark-deflist-revisited/0.5.23
+[Socket Badge]: https://badge.socket.dev/npm/package/@verikami/remark-deflist-revisited
