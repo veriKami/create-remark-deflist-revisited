@@ -45,23 +45,22 @@ This project is Open Source and available under the MIT License.
 [veriKami]: https://verikami.com
 [Weronika Kami]: https://linkedin.com/in/verikami
 
-[module]: https://github.com/veriKami/remark-deflist-revisited
 [+:simple]: https://github.com/veriKami/remark-deflist-revisited-simple
 [+:express]: https://github.com/veriKami/remark-deflist-revisited-express
 [+:worker]: https://github.com/veriKami/remark-deflist-revisited-worker
 [+:astro]: https://github.com/veriKami/remark-deflist-revisited-astro
 
-[GH]: https://github.com/veriKami/remark-deflist-revisited
 [GH Badge]: https://img.shields.io/badge/GitHub-Repository-blue?logo=github
+[GH]: https://github.com/veriKami/remark-deflist-revisited
 
-[NPM]: https://www.npmjs.com/package/@verikami/remark-deflist-revisited
 [NPM Badge]: https://img.shields.io/npm/v/@verikami/remark-deflist-revisited?logo=npm&logoColor=white&labelColor=red&color=black
+[NPM]: https://www.npmjs.com/package/@verikami/remark-deflist-revisited
 
-[JSR]: https://jsr.io/@verikami/remark-deflist-revisited
 [JSR Badge]: https://jsr.io/badges/@verikami/remark-deflist-revisited
+[JSR]: https://jsr.io/@verikami/remark-deflist-revisited
 
-[Downloads]: https://www.npmjs.com/package/@verikami/remark-deflist-revisited
 [Downloads Badge]: https://img.shields.io/npm/dm/@verikami/remark-deflist-revisited.svg
+[Downloads]: https://www.npmjs.com/package/@verikami/remark-deflist-revisited
 
-[Socket]: https://socket.dev/npm/package/@verikami/remark-deflist-revisited
 [Socket Badge]: https://badge.socket.dev/npm/package/@verikami/remark-deflist-revisited
+[Socket]: https://socket.dev/npm/package/@verikami/remark-deflist-revisited
