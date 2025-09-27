@@ -24,11 +24,14 @@
   ],
   "author": "veriKami <verikami@gmail.com> (https://verikami.com/)",
   "license": "MIT",
-  "repository": "github:veriKami/create-remark-deflist-revisited",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veriKami/create-remark-deflist-revisited.git"
+  },
   "homepage": "https://github.com/veriKami/create-remark-deflist-revisited#readme",
   "type": "module",
   "bin": {
-    "create-remark-deflist-revisited": "./cli.js"
+    "create-remark-deflist-revisited": "cli.js"
   },
   "files": [
     "templates",
