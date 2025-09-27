@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 //: --------------------------------------------------------
 import {
-  readFile, writeFile, access, mkdir, readdir, lstat, copyFile
+  readFile, writeFile, copyFile, access, lstat, mkdir, readdir, rm
 } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,51 +11,68 @@ import $ from "ansi-colors";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+$.theme({ title: $.bold.cyan });
+
 //: --------------------------------------------------------
 //: TEMPLATES
 //: --------------------------------------------------------
 const TEMPLATES = {
   "remark-deflist-revisited-simple": {
     name: "Simple Node.js Module",
-    description: "Minimalist example without Express dependencies",
-    emoji: "📦",
+    description: "— Minimalist Node.js example",
+    emoji: "📁",
     color: $.green,
-    commands: ["node index.js", "npm test"],
+    commands: ["npm start", "npm run dev", "npm run example", "npm test"],
     dependencies: ["@verikami/remark-deflist-revisited", "remark", "remark-html"],
-    exclude: ["•*", "Icon*", ".git", ".gitignore", "node_modules", "package-lock.json", "output.html"]
+    exclude: ["output.html"]
   },
   "remark-deflist-revisited-express": {
     name: "Express.js Server",
-    description: "Full Node.js server with REST API endpoints",
-    emoji: "⚡",
-    color: $.yellow,
+    description: "— Express.js server with REST API endpoints",
+    emoji: "📁",
+    // color: $.yellow,
+    color: $.green,
     commands: ["npm start", "npm run dev"],
     dependencies: ["@verikami/remark-deflist-revisited", "express", "remark", "remark-html", "dedent"],
-    exclude: ["•*", "Icon*", ".git", ".gitignore", "node_modules", "package-lock.json"]
+    exclude: []
   },
   "remark-deflist-revisited-worker": {
     name: "Cloudflare Worker",
-    description: "Serverless edge runtime with global deployment",
-    emoji: "🚀",
-    color: $.blue,
+    description: "— Serverless edge runtime with global deployment",
+    emoji: "📁",
+    // color: $.blue,
+    color: $.green,
     commands: ["npm run dev", "npm run deploy"],
     dependencies: ["@verikami/remark-deflist-revisited", "remark", "remark-html", "dedent"],
-    exclude: ["•*", "Icon*", ".git", ".gitignore", "node_modules", "package-lock.json", ".wrangler"]
+    exclude: [".wrangler"]
+  },
+  "remark-deflist-revisited-astro": {
+    name: "Astro Static Site",
+    description: "— Static site generation and server-side rendering",
+    emoji: "📁",
+    color: $.green,
+    // color: $.magenta,
+    commands: ["npm run dev", "npm run build", "npm run preview"],
+    dependencies: ["@verikami/remark-deflist-revisited", "astro"],
+    exclude: [".astro"]
   }
 };
 
 //: --------------------------------------------------------
-//: Funkcja do kopiowania z filtrowaniem
+//: Function for copy files with filter
 //: --------------------------------------------------------
-async function copyTemplateFiles(source, destination, excludePatterns = []) {
+async function copyTemplateFiles(source, destination, exclude = []) {
+  const xclude = ["•*", "Icon*", "__*", ".codes*", ".git", "node_modules", "package-*"];
+  exclude = [...xclude, ...exclude];
   try {
     await access(source);
+    await rm(destination, { recursive: true, force: true });
     await mkdir(destination, { recursive: true });
 
     const items = await readdir(source);
 
     for (const item of items) {
-      const shouldExclude = excludePatterns.some(pattern => {
+      const shouldExclude = exclude.some(pattern => {
         if (pattern.includes("*")) {
           const regex = new RegExp(pattern.replace("*", ".*"));
           return regex.test(item);
@@ -64,7 +81,7 @@ async function copyTemplateFiles(source, destination, excludePatterns = []) {
       });
 
       if (shouldExclude) {
-        console.log($.dim(`  ↳ Skipping: ${item}`));
+        console.log($.dim(`   ↳ Skipping: ${item}`));
         continue;
       }
 
@@ -73,10 +90,10 @@ async function copyTemplateFiles(source, destination, excludePatterns = []) {
       const stats = await lstat(sourcePath);
 
       if (stats.isDirectory()) {
-        await copyTemplateFiles(sourcePath, destPath, excludePatterns);
+        await copyTemplateFiles(sourcePath, destPath, exclude);
       } else {
         await copyFile(sourcePath, destPath);
-        console.log($.dim(`  ↳ Created: ${item}`));
+        console.log($.dim(`   ↳ Created: ${item}`));
       }
     }
   }
@@ -86,31 +103,31 @@ async function copyTemplateFiles(source, destination, excludePatterns = []) {
 }
 
 //: --------------------------------------------------------
-//: Funkcja do instalacji dependencies
+//: Promise for installing dependencies
 //: --------------------------------------------------------
-async function installDependencies(projectPath, packageManager) {
+function installDependencies(projectPath, packageManager) {
   return new Promise((resolve, reject) => {
-    console.log($.cyan(`\n📦 Installing dependencies with ${packageManager}...\n`));
+    console.log($.cyan(`📦 Installing dependencies with ${packageManager}...\n`));
 
     const command = packageManager === "pnpm" ? "pnpm install" :
       packageManager === "yarn" ? "yarn install" : "npm install";
 
-    const installProcess = exec(command, { cwd: projectPath });
+    const install = exec(command, { cwd: projectPath });
 
-    installProcess.stdout.on("data", (data) => {
-      process.stdout.write($.dim(data));
+    install.stdout.on("data", (data) => {
+      process.stdout.write("   " + $.dim(data));
     });
 
-    installProcess.stderr.on("data", (data) => {
-      process.stderr.write($.yellow(data));
+    install.stderr.on("data", (data) => {
+      process.stderr.write("   " + $.yellow(data));
     });
 
-    installProcess.on("close", (code) => {
+    install.on("close", (code) => {
       if (code === 0) {
         console.log($.green("\n✅ Dependencies installed successfully"));
         resolve();
       } else {
-        reject(new Error(`\nInstallation failed with code ${code}`));
+        reject(new Error(`\n❌ Installation failed with code ${code}`));
       }
     });
   });
@@ -133,15 +150,14 @@ function run(cmd, options) {
 //: MAIN
 //: --------------------------------------------------------
 async function main() {
-  console.log(`
-  ${$.bold($.cyan("✨ Create Remark Deflist Revisited Project"))}
-  ${$.dim("Scaffold a project with enhanced definition lists support")}
-
-  ${$.yellow("Press Ctrl+C at any time to exit.")}
-  `);
+  console.log(`  ${$.magenta("─").repeat(57)}
+  ${$.title("🍋 Create Remark Deflist Revisited Project")}
+  ${$.magenta("─").repeat(57)}
+  ${$.dim("Scaffold a project with enhanced definition lists support\n")}
+  ${$.yellow("Press Ctrl+C at any time to exit\n")}`);
 
   try {
-    //: 1. Wybór template'u z opcją exit
+    //: 1. Template with exit
     //: -------------------------------------
     const { template } = await enquirer.prompt({
       type: "select",
@@ -150,12 +166,12 @@ async function main() {
       choices: [
         ...Object.entries(TEMPLATES).map(([key, config]) => ({
           name: key,
-          message: `${config.emoji}  ${config.color(config.name)}`,
+          message: `${config.emoji} ${config.color(config.name)}`,
           hint: $.dim(config.description)
         })),
         {
           name: "exit",
-          message: $.red("❌  Exit\n"),
+          message: $.yellow("❌ Exit\n"),
           value: "exit"
         }
       ],
@@ -165,11 +181,11 @@ async function main() {
     });
 
     if (template === "exit") {
-      console.log($.yellow("\n  👋  Goodbye!\n"));
+      console.log($.yellow("\n  🍋 Goodbye!\n"));
       return;
     }
 
-    //: 2. Nazwa projektu z opcją skip/exit
+    //: 2. Project name with skip/exit
     //: -------------------------------------
     const { projectName } = await enquirer.prompt({
       type: "input",
@@ -185,7 +201,7 @@ async function main() {
     });
 
     if (projectName.toLowerCase() === "skip") {
-      console.log($.yellow("❌ Creation cancelled"));
+      console.log($.yellow("\n❌ Creation cancelled"));
       return;
     }
 
@@ -196,39 +212,38 @@ async function main() {
       name: "packageManager",
       message: $.cyan("Choose package manager:"),
       choices: [
-        { name: "skip", message: "⏭️  Skip installation" },
+        { name: "skip", message: `🍋 ${$.yellow("Skip packages installation")}`},
         { name: "npm", message: "📦 npm" },
-        { name: "pnpm", message: "📦 pnpm (fast)" },
+        { name: "pnpm", message: "📦 pnpm" },
         { name: "yarn", message: "📦 yarn" },
       ],
       initial: "skip"
     });
 
-    //: 4. Dodatkowe opcje z możliwością skip
+    //: 4. Additional options with skip
     //: -------------------------------------
     const { features } = await enquirer.prompt({
-      type: "multiselect",
+      type: "select",
       name: "features",
-      message: $.cyan("Additional features (space to select, enter to continue):"),
+      message: $.cyan("Additional features:"),
       choices: [
-        // { name: "skip", message: "⏭️  Skip all additional features" },
-        { name: "git", message: "📚 Initialize Git repository" },
-        // { name: "examples", message: "📝 Include example markdown files" },
-        // { name: "readme", message: "📄 Generate README.md" },
+        { name: "skip", message: `🍋 ${$.yellow("Skip additional features")}`},
+        { name: "git", message: "⛺️ Initialize Git repository" }
       ],
-      result(values) {
-        if (values.includes("skip")) return { skip: true };
-        return values.reduce((acc, value) => {
-          acc[value] = true;
-          return acc;
-        }, {});
-      }
+      //: @ multiselect
+      // result(values) {
+      //   if (values.includes("skip")) return { skip: true };
+      //   return values.reduce((acc, value) => {
+      //     acc[value] = true;
+      //     return acc;
+      //   }, {});
+      // }
     });
 
     const templateConfig = TEMPLATES[template];
     const projectPath = join(process.cwd(), projectName);
 
-    //: Sprawdź czy folder już istnieje
+    //: Check if folder exists
     //: -------------------------------------
     try {
       await access(projectPath);
@@ -240,7 +255,7 @@ async function main() {
       });
 
       if (!overwrite) {
-        console.log($.yellow("❌ Creation cancelled"));
+        console.log($.yellow("\n❌ Creation cancelled"));
         return;
       }
     }
@@ -249,10 +264,10 @@ async function main() {
     }
 
     console.log(`\n${$.cyan("📦 Creating project...\n")}`);
-    console.log($.dim(`Template: ${templateConfig.name}`));
-    console.log($.dim(`Location: ./${projectName}`));
+    console.log($.dim(`   Template: ${templateConfig.name}`));
+    console.log($.dim(`   Location: ./${projectName}\n`));
 
-    //: Kopiowanie z filtrowaniem
+    //: Copy with filter
     //: -------------------------------------
     await copyTemplateFiles(
       join(__dirname, "templates", template),
@@ -260,14 +275,17 @@ async function main() {
       templateConfig.exclude
     );
 
-    //: Aktualizacja package.json
+    console.log("\n");
+
+    //: Actual package.json
     //: -------------------------------------
     const packagePath = join(projectPath, "package.json");
     const pkg = JSON.parse(await readFile(packagePath, "utf8"));
     pkg.name = projectName;
-    await writeFile(packagePath, JSON.stringify(pkg, null, 2));
 
-    //: Instalacja dependencies jeśli nie skip
+    await writeFile(packagePath, JSON.stringify(pkg, null, 2) + "\n");
+
+    //: Install dependencies
     //: -------------------------------------
     if (packageManager !== "skip") {
       try {
@@ -279,12 +297,14 @@ async function main() {
       }
     }
 
-    //: Inicjalizacja Git jeśli wybrano (i nie skip)
+    //: Git init
     //: -------------------------------------
-    if (features.git && !features.skip) {
+    //: @ multiselect
+    //: if (features.git && !features.skip) {
+    if (features === "git") {
       try {
         await run("git init -q", { cwd: projectPath });
-        console.log($.green("\n📚 Git repository initialized"))
+        console.log($.green("✅ Git repository initialized"))
       }
       catch {
         //: continue
@@ -293,18 +313,13 @@ async function main() {
 
     //: Final output
     //: -------------------------------------
+    console.log(`${$.green("✅ Project created successfully")}`);
     console.log(`
-${$.green("✅ Project created successfully")}
-
 ${$.bold("   Next steps:")}
 ${$.cyan(`     cd ${projectName}`)}${packageManager === "skip" ? $.cyan("\n     npm install") : ""}
 
 ${$.bold("   Available commands:")}
 ${templateConfig.commands.map(cmd => $.cyan(`     ${cmd}`)).join("\n")}
-
-${$.bold("   Key files:")}
-${$.dim("      index.js/server.js - Main application file")}
-${$.dim("      package.json - Project configuration")}
 
 ${$.dim("   Documentation: https://github.com/veriKami/remark-deflist-revisited")}
 ${$.dim("   Issues: https://github.com/veriKami/remark-deflist-revisited/issues")}
@@ -312,18 +327,21 @@ ${$.dim("   Issues: https://github.com/veriKami/remark-deflist-revisited/issues"
   }
   catch (err) {
     if (err.message === "cancelled") {
-      console.log($.yellow("👋 Goodbye!"));
-    } else {
-      console.error($.red("💥 Error:"), err.message);
+      console.log($.yellow("\n🍋 Goodbye!"));
+    } else if (err.message) {
+      console.error($.red("\n❌ Error:"), err.message);
       console.log($.dim("If this persists, please report the issue."));
+    } else {
+      process.exit(0);
     }
   }
 }
 
-//: Handle Ctrl+C gracefully
 //: -----------------------------------------
+//: Handle Ctrl+C
+
 process.on("SIGINT", () => {
-  console.log($.yellow("\n\n👋 Goodbye!"));
+  console.log($.yellow("\n\n🍋 Goodbye!"));
   process.exit(0);
 });
 
