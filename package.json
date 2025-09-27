@@ -1,6 +1,6 @@
 {
   "name": "create-remark-deflist-revisited",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Scaffold a project with @verikami/remark-deflist-revisited – interactive template selection",
   "keywords": [
     "remark",
