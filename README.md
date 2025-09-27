@@ -28,31 +28,13 @@ pnpm create remark-deflist-revisited
 yarn create remark-deflist-revisited
 ```
 
-## Other Options
-
-### Cloudflare Worker demo (via module itself)
+## Cloudflare Worker demo (via module itself)
 
 ```bash
 npx @verikami/remark-deflist-revisited@latest
 ```
 ```bash
 npx @verikami/remark-deflist-revisited --help
-```
-
-### GitHub clone + create from Template
-
-```bash
-## Simple Node.js example
-ツ gh repo create --private my-simple -c -p veriKami/remark-deflist-revisited-simple
-
-## Express.js example
-ツ gh repo create --private my-express -c -p veriKami/remark-deflist-revisited-express
-
-## Cloudflare Worker example
-ツ gh repo create --private my-worker -c -p veriKami/remark-deflist-revisited-worker
-
-## Astro example
-ツ gh repo create --private my-astro -c -p veriKami/remark-deflist-revisited-astro
 ```
 
 ## License
@@ -63,12 +45,7 @@ This project is Open Source and available under the MIT License.
 [veriKami]: https://verikami.com
 [Weronika Kami]: https://linkedin.com/in/verikami
 
-[page]: https://verikami.github.io/remark-deflist-revisited
-[inline]: https://verikami.github.io/remark-deflist-revisited/script.esm.sh.html
-[generated]: https://verikami.github.io/remark-deflist-revisited/generated
-
 [module]: https://github.com/veriKami/remark-deflist-revisited
-[samples]: https://github.com/veriKami/remark-deflist-revisited/tree/main/samples
 [+:simple]: https://github.com/veriKami/remark-deflist-revisited-simple
 [+:express]: https://github.com/veriKami/remark-deflist-revisited-express
 [+:worker]: https://github.com/veriKami/remark-deflist-revisited-worker
