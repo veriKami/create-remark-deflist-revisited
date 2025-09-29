@@ -35,6 +35,8 @@ async function collectFiles(dir, relative = "", files = new Map(), $ = false) {
     "•*",
     "node_modules",
     "package-*",
+    "pnpm-*",
+    "yarn.lock",
     ".codesandbox",
     // ".vscode",
     ".wrangler",
