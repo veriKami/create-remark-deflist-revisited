@@ -1,5 +1,5 @@
 import { writeFile, mkdir } from "node:fs/promises";
-import path from "node:path";
+import { join, dirname } from "node:path";
 
 const files = {
   ".gitignore": "#: --------------------------------\n#: veriKami\n\nnode_modules\n\n**/•*\n*~\nIcon*\n\npackage-lock.json\n",
@@ -22,8 +22,8 @@ async function ensureDir(dir) {
 async function generate(target = ".", $ = true) {
   if ($) console.log("\n🚺 CREATING PROJECT\n");
   for (const [filePath, content] of Object.entries(files)) {
-    const fullPath = path.join(target, filePath);
-    await ensureDir(path.dirname(fullPath));
+    const fullPath = join(target, filePath);
+    await ensureDir(dirname(fullPath));
     await writeFile(fullPath, content);
     if ($) console.log("   📄", filePath)
     else console.log("   ↳ Created:", filePath)
