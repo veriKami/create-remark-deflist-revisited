@@ -164,7 +164,7 @@ function installDependencies(projectPath, packageManager) {
 //: MAIN
 //: --------------------------------------------------------
 async function main() {
-  console.log(`  ${$.magenta("─").repeat(57)}
+  console.log(`\n  ${$.magenta("─").repeat(57)}
   ${$.title("Create Remark Deflist Revisited Project")}
   ${$.magenta("─").repeat(57)}
   ${$.dim("Scaffold a project with enhanced definition lists support\n")}
