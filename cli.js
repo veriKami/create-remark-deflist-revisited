@@ -71,7 +71,7 @@ async function copyTemplateFiles(source, destination) {
   await rm(destination, { recursive: true, force: true });
 
   const src = basename(source).split("-").pop();
-  const cmd = `node ${join(__dirname, "pack", `bundle.${src}.js`)} ${destination} false`;
+  const cmd = `node ${join(__dirname, "pack", `bundle.${src}.js`)} "${destination}" false`;
 
   const { stdout, stderr } = await exe(cmd);
   console.log($.dim(stdout));
