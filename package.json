@@ -1,7 +1,7 @@
 {
   "name": "create-remark-deflist-revisited",
   "version": "0.3.0",
-  "description": "Scaffold a project with @verikami/remark-deflist-revisited – interactive template selection",
+  "description": "Remark plugin for demonstrating nested definition lists in action. Create a skeleton project with @verikami/remark-deflist-revisited – interactive template selection.",
   "keywords": [
     "remark",
     "remark-plugin",
@@ -16,6 +16,7 @@
     "interactive",
     "cloudflare",
     "express",
+    "astro",
     "node",
     "pnpm",
     "npm",
@@ -34,6 +35,7 @@
     "create-remark-deflist-revisited": "cli.js"
   },
   "files": [
+    "pack",
     "templates",
     "cli.js"
   ],
@@ -45,11 +47,11 @@
   },
   "scripts": {
     "start": "./cli.js",
+    "build": "src/make.all.js",
     "self": "npx create-remark-deflist-revisited",
     "test": "npm publish --dry-run",
+    "test:pack": "npm pack --silent && tar -xvzf *.tgz && rm -rf package *.tgz",
     "stats": "npx pkg-stats create-remark-deflist-revisited",
-    "show": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-    "pack": "npm pack",
     "bump": "npm version patch && git push && git push --tags"
   },
   "dependencies": {

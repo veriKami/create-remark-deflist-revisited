@@ -21,6 +21,7 @@ jobs:
           node-version: 20
           registry-url: "https://npm.pkg.github.com/"
       - run: npm pkg set name="@verikami/create-remark-deflist-revisited"
+      - run: npm run build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,6 +39,7 @@ jobs:
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
+      - run: npm run build
       - run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
