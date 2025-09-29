@@ -10,20 +10,24 @@ import makeDiff from "./make.diff.js";
 const exec = promisify(await import("node:child_process")
   .then(module => module.exec));
 
+//: CONFIG
+//: -----------------------------------------
 const templates = ["astro", "express", "simple", "worker"];
 
-/** export **********************************
- */
+//: MAIN
+//: -----------------------------------------
 async function makeAll($ = "") {
   for (const tpl of templates) {
     const projectPath = `templates/remark-deflist-revisited-${tpl}`;
     const outputFile = `pack/bundle.${tpl}.js`;
     const testPath = `pack/test.${tpl}`;
     try {
+      ////
       /// node make.bundle.js templates/remark-deflist-revisited-simple pack/bundle.simple.js
       // await makeBundle(projectPath, outputFile, true); //: for full console output
       await makeBundle(projectPath, outputFile);
 
+      ////
       /// node pack/bundle.simple.js pack/test.simple
       //
       await exec(`node ${outputFile} ${testPath}`);
@@ -31,10 +35,12 @@ async function makeAll($ = "") {
       console.log("" + "─".repeat(37));
       console.log(`📁 Created: ${testPath}`);
 
+      ////
       /// node make.diff.js templates/remark-deflist-revisited-simple pack/test.simple
       //
       await makeDiff(projectPath, testPath);
 
+      ////
       /// cleaning
       //
       if (!$) await rm(testPath, { recursive: true, force: true });

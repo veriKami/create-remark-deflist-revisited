@@ -8,23 +8,8 @@ import path from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 
-/** export **********************************
- */
-async function makeBundle(projectPath, outputFile, $ = false) {
-  const n = $ ? "\n" : "";
-
-  console.log("\n" + "─".repeat(57));
-  console.log(`🚺 TARGET: ${outputFile}`);
-  console.log("" + "─".repeat(57));
-  console.log(`📦 Packing: ${projectPath}${n}`);
-
-  const files = await collectFiles(projectPath, "", undefined, $);
-  const bundle = generateBundle(files, outputFile);
-
-  await writeFile(outputFile, bundle, "utf8");
-  console.log(`${n}📦 Created: ${outputFile} (${files.size} plików)`);
-}
-
+//: COLLECT FILES
+//: -----------------------------------------
 async function collectFiles(dir, relative = "", files = new Map(), $ = false) {
   const items = await readdir(dir);
 
@@ -94,6 +79,8 @@ async function collectFiles(dir, relative = "", files = new Map(), $ = false) {
   return files;
 }
 
+//: GENERATE BUNDLE
+//: -----------------------------------------
 function generateBundle(files, outputFile = "bundle.js") {
   const filesObj = Object.fromEntries(files);
   //: ---------------------------------------
@@ -151,6 +138,23 @@ if (import.meta.url.endsWith(process.argv[1])) {
 
 export default generate;
 `;
+}
+
+//: MAIN
+//: -----------------------------------------
+async function makeBundle(projectPath, outputFile, $ = false) {
+  const n = $ ? "\n" : "";
+
+  console.log("\n" + "─".repeat(57));
+  console.log(`🚺 TARGET: ${outputFile}`);
+  console.log("" + "─".repeat(57));
+  console.log(`📦 Packing: ${projectPath}${n}`);
+
+  const files = await collectFiles(projectPath, "", undefined, $);
+  const bundle = generateBundle(files, outputFile);
+
+  await writeFile(outputFile, bundle, "utf8");
+  console.log(`${n}📦 Created: ${outputFile} (${files.size} plików)`);
 }
 
 //: USAGE

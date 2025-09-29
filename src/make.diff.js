@@ -6,10 +6,14 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
 
+//: HASH
+//: -----------------------------------------
 function hashContent(content) {
   return crypto.createHash("md5").update(content).digest("hex");
 }
 
+//: GET FILES
+//: -----------------------------------------
 async function getFilesFromDir(dirPath) {
   const files = new Map();
 
@@ -35,6 +39,8 @@ async function getFilesFromDir(dirPath) {
   return files;
 }
 
+//: COMPARE FILES
+//: -----------------------------------------
 async function compareFiles(originalPath, generatedPath) {
   console.log("" + "─".repeat(37));
   console.log("📁 PORÓWNANIE WYGENEROWANYCH PLIKÓW");
@@ -86,6 +92,8 @@ async function compareFiles(originalPath, generatedPath) {
   return results;
 }
 
+//: DISPLAY RESULTS
+//: -----------------------------------------
 function displayResults(results) {
   // console.log("\n📊 WYNIK PORÓWNANIA");
   // console.log("─".repeat(57));
@@ -137,8 +145,8 @@ function displayResults(results) {
   }
 }
 
-/** export **********************************
- */
+//: MAIN
+//: -----------------------------------------
 async function makeDiff(originalPath, generatedPath) {
   const results = await compareFiles(originalPath, generatedPath);
   displayResults(results);
