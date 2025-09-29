@@ -1,13 +1,21 @@
 #!/usr/bin/env node
 //: --------------------------------------------------------
-import {
-  readFile, writeFile, copyFile, access, lstat, mkdir, readdir, rm
-} from "node:fs/promises";
-import { join, dirname } from "node:path";
+import { promisify } from "node:util";
+import { readFile, writeFile, access, rm } from "node:fs/promises";
+// import {
+//   readFile, writeFile, copyFile, access, lstat, mkdir, readdir, rm
+// } from "node:fs/promises";
+import { join, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { exec } from "node:child_process";
 import enquirer from "enquirer";
 import $ from "ansi-colors";
+
+// import { promisify } from 'node:util';
+// import child_process from 'node:child_process';
+// const exec = promisify(child_process.exec);
+const exe = promisify(await import("node:child_process")
+  .then(module => module.exec));
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -30,7 +38,6 @@ const TEMPLATES = {
     name: "Express.js Server",
     description: "— Express.js server with REST API endpoints",
     emoji: "📁",
-    // color: $.yellow,
     color: $.green,
     commands: ["npm start", "npm run dev"],
     dependencies: ["@verikami/remark-deflist-revisited", "express", "remark", "remark-html", "dedent"],
@@ -40,7 +47,6 @@ const TEMPLATES = {
     name: "Cloudflare Worker",
     description: "— Serverless edge runtime with global deployment",
     emoji: "📁",
-    // color: $.blue,
     color: $.green,
     commands: ["npm run dev", "npm run deploy"],
     dependencies: ["@verikami/remark-deflist-revisited", "remark", "remark-html", "dedent"],
@@ -51,7 +57,6 @@ const TEMPLATES = {
     description: "— Static site generation and server-side rendering",
     emoji: "📁",
     color: $.green,
-    // color: $.magenta,
     commands: ["npm run dev", "npm run build", "npm run preview"],
     dependencies: ["@verikami/remark-deflist-revisited", "astro"],
     exclude: [".astro"]
@@ -59,11 +64,31 @@ const TEMPLATES = {
 };
 
 //: --------------------------------------------------------
+//: Function for copy files from bundle
+//: --------------------------------------------------------
+async function copyTemplateFiles(source, destination) {
+
+  await rm(destination, { recursive: true, force: true });
+
+  const src = basename(source).split("-").pop();
+  const cmd = `node pack/bundle.${src}.js ${destination} false`;
+
+  const { stdout, stderr } = await exe(cmd);
+  console.log($.dim(stdout));
+  // console.error('stderr:', stderr);
+  // if (stderr) throw Error(stderr.message);
+  // console.error(stderr.split("\n")[0]);
+  if (stderr) throw Error(stderr.split("\n")[0]);
+}
+
+//: --------------------------------------------------------
 //: Function for copy files with filter
 //: --------------------------------------------------------
-async function copyTemplateFiles(source, destination, exclude = []) {
+/*/
+async function _copyTemplateFiles(source, destination, exclude = []) {
   const xclude = ["•*", "Icon*", "__*", ".codes*", ".git", "node_modules", "package-*"];
   exclude = [...xclude, ...exclude];
+
   try {
     await access(source);
     await rm(destination, { recursive: true, force: true });
@@ -101,6 +126,8 @@ async function copyTemplateFiles(source, destination, exclude = []) {
     throw new Error(`Failed to copy template: ${err.message}`);
   }
 }
+//*/
+//: --------------------------------------------------------
 
 //: --------------------------------------------------------
 //: Promise for installing dependencies
@@ -134,24 +161,11 @@ function installDependencies(projectPath, packageManager) {
 }
 
 //: --------------------------------------------------------
-//: Promise for exec (git)
-//: --------------------------------------------------------
-function run(cmd, options) {
-  return new Promise((resolve, reject) => {
-    exec(cmd, options, (error, stdout, stderr) => {
-      if (error) return reject(error);
-      if (stderr) return reject(stderr);
-      resolve(stdout);
-    });
-  });
-}
-
-//: --------------------------------------------------------
 //: MAIN
 //: --------------------------------------------------------
 async function main() {
   console.log(`  ${$.magenta("─").repeat(57)}
-  ${$.title("🍋 Create Remark Deflist Revisited Project")}
+  ${$.title("Create Remark Deflist Revisited Project")}
   ${$.magenta("─").repeat(57)}
   ${$.dim("Scaffold a project with enhanced definition lists support\n")}
   ${$.yellow("Press Ctrl+C at any time to exit\n")}`);
@@ -275,8 +289,6 @@ async function main() {
       templateConfig.exclude
     );
 
-    console.log("\n");
-
     //: Actual package.json
     //: -------------------------------------
     const packagePath = join(projectPath, "package.json");
@@ -303,7 +315,7 @@ async function main() {
     //: if (features.git && !features.skip) {
     if (features === "git") {
       try {
-        await run("git init -q", { cwd: projectPath });
+        await exe("git init -q", { cwd: projectPath });
         console.log($.green("✅ Git repository initialized"))
       }
       catch {
