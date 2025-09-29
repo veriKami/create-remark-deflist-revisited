@@ -11,11 +11,11 @@ const exec = promisify(await import("node:child_process")
   .then(module => module.exec));
 
 //: CONFIG
-//: -----------------------------------------
+//: --------------------------------------------------------
 const templates = ["astro", "express", "simple", "worker"];
 
 //: MAIN
-//: -----------------------------------------
+//: --------------------------------------------------------
 async function makeAll($ = "") {
   for (const tpl of templates) {
     const projectPath = `templates/remark-deflist-revisited-${tpl}`;
@@ -53,7 +53,7 @@ async function makeAll($ = "") {
 }
 
 //: USAGE
-//: -----------------------------------------
+//: --------------------------------------------------------
 if (import.meta.url.endsWith(process.argv[1])) {
   const option = process.argv[2];
   if (option === "--help") {

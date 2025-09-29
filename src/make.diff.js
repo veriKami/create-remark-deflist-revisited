@@ -7,13 +7,13 @@ import crypto from "node:crypto";
 import path from "node:path";
 
 //: HASH
-//: -----------------------------------------
+//: --------------------------------------------------------
 function hashContent(content) {
   return crypto.createHash("md5").update(content).digest("hex");
 }
 
 //: GET FILES
-//: -----------------------------------------
+//: --------------------------------------------------------
 async function getFilesFromDir(dirPath) {
   const files = new Map();
 
@@ -40,7 +40,7 @@ async function getFilesFromDir(dirPath) {
 }
 
 //: COMPARE FILES
-//: -----------------------------------------
+//: --------------------------------------------------------
 async function compareFiles(originalPath, generatedPath) {
   console.log("" + "─".repeat(37));
   console.log("📁 PORÓWNANIE WYGENEROWANYCH PLIKÓW");
@@ -49,7 +49,7 @@ async function compareFiles(originalPath, generatedPath) {
   console.log(`   📁 Wygenerowany: ${generatedPath}`);
 
   //: Pobierz tylko pliki z wygenerowanego projektu
-  //: ------------------------------------------------------
+  //: ---------------------------------------
   const generatedFiles = await getFilesFromDir(generatedPath);
   console.log(`   📦 Jest (${generatedFiles.size}) plików w projekcie`);
 
@@ -61,7 +61,7 @@ async function compareFiles(originalPath, generatedPath) {
   };
 
   //: Porównaj pliki w wygenerowanym projekcie
-  //: ------------------------------------------------------
+  //: ---------------------------------------
   for (const [relPath, generatedData] of generatedFiles) {
     const originalFilePath = path.join(originalPath, relPath);
 
@@ -93,7 +93,7 @@ async function compareFiles(originalPath, generatedPath) {
 }
 
 //: DISPLAY RESULTS
-//: -----------------------------------------
+//: --------------------------------------------------------
 function displayResults(results) {
   // console.log("\n📊 WYNIK PORÓWNANIA");
   // console.log("─".repeat(57));
@@ -146,7 +146,7 @@ function displayResults(results) {
 }
 
 //: MAIN
-//: -----------------------------------------
+//: --------------------------------------------------------
 async function makeDiff(originalPath, generatedPath) {
   const results = await compareFiles(originalPath, generatedPath);
   displayResults(results);
@@ -154,7 +154,7 @@ async function makeDiff(originalPath, generatedPath) {
 }
 
 //: USAGE
-//: -----------------------------------------
+//: --------------------------------------------------------
 if (import.meta.url === `file://${process.argv[1]}`) {
   const [orig, gen] = process.argv.slice(2);
   if (!orig || !gen) {

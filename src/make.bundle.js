@@ -9,7 +9,7 @@ import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 
 //: COLLECT FILES
-//: -----------------------------------------
+//: --------------------------------------------------------
 async function collectFiles(dir, relative = "", files = new Map(), $ = false) {
   const items = await readdir(dir);
 
@@ -80,7 +80,7 @@ async function collectFiles(dir, relative = "", files = new Map(), $ = false) {
 }
 
 //: GENERATE BUNDLE
-//: -----------------------------------------
+//: --------------------------------------------------------
 function generateBundle(files, outputFile = "bundle.js") {
   const filesObj = Object.fromEntries(files);
   //: ---------------------------------------
@@ -141,7 +141,7 @@ export default generate;
 }
 
 //: MAIN
-//: -----------------------------------------
+//: --------------------------------------------------------
 async function makeBundle(projectPath, outputFile, $ = false) {
   const n = $ ? "\n" : "";
 
@@ -158,7 +158,7 @@ async function makeBundle(projectPath, outputFile, $ = false) {
 }
 
 //: USAGE
-//: -----------------------------------------
+//: --------------------------------------------------------
 if (process.argv[1] === __filename) {
   const projectPath = process.argv[2];
   const name = process.argv[2] ? process.argv[2].split("-").pop() : "_";
