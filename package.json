@@ -50,6 +50,7 @@
     "start": "./cli.js",
     "build": "src/make.all.js",
     "self": "npx create-remark-deflist-revisited",
+    "clean": "rm -rf remark-deflist-revisited-*",
     "test": "npm publish --dry-run",
     "test:pack": "npm pack --silent && tar -xvzf *.tgz && rm -rf package *.tgz",
     "stats": "npx pkg-stats create-remark-deflist-revisited",
