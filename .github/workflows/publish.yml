@@ -10,6 +10,7 @@ jobs:
   publish-gpr:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write #: OIDC (provenance)
       contents: read
       packages: write
     steps:
@@ -29,7 +30,7 @@ jobs:
   publish-npm:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write #: OIDC (not working)
+      id-token: write #: OIDC (provenance)
       contents: read
     steps:
       - uses: actions/checkout@v5
