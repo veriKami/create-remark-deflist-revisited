@@ -5,6 +5,7 @@
 [![JSR][JSR Badge]][JSR]
 [![Downloads][Downloads Badge]][Downloads]
 [![Socket][Socket Badge]][Socket]
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FveriKami%2Fcreate-remark-deflist-revisited.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FveriKami%2Fcreate-remark-deflist-revisited?ref=badge_shield)
 
 Example implementations for module **`@verikami/remark-deflist-revisited`**.  
 They are also published as standalone repositories (templates):
@@ -64,3 +65,6 @@ This project is Open Source and available under the MIT License.
 
 [Socket Badge]: https://badge.socket.dev/npm/package/@verikami/remark-deflist-revisited
 [Socket]: https://socket.dev/npm/package/@verikami/remark-deflist-revisited
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FveriKami%2Fcreate-remark-deflist-revisited.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FveriKami%2Fcreate-remark-deflist-revisited?ref=badge_large)
