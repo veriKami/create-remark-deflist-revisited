@@ -29,7 +29,7 @@
     "type": "git",
     "url": "git+https://github.com/veriKami/create-remark-deflist-revisited.git"
   },
-  "homepage": "https://github.com/veriKami/create-remark-deflist-revisited#readme",
+  "homepage": "https://verikami.com",
   "type": "module",
   "bin": {
     "create-remark-deflist-revisited": "cli.js"
@@ -40,7 +40,8 @@
     "cli.js"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "engines": {
     "node": ">=20.0.0"
