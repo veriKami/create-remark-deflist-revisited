@@ -39,7 +39,7 @@ npx @verikami/remark-deflist-revisited --help
 
 ## License
 
-This project is Open Source and available under the MIT License.  
+This project is Open Source and available under the MIT License  
 2025 © MIT °// [veriKami] °// [Weronika Kami]
 
 [veriKami]: https://verikami.com
