@@ -1,6 +1,6 @@
 {
   "name": "create-remark-deflist-revisited",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "Remark plugin for demonstrating nested definition lists in action. Create a skeleton project with @verikami/remark-deflist-revisited – interactive template selection.",
   "keywords": [
     "remark",
